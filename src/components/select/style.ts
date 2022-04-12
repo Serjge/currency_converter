@@ -18,6 +18,7 @@ export const Title = styled.div`
   border: ${({ theme: { mainColor } }) => mainColor} solid 2px;
   background-color: ${({ theme: { backgroundColor } }) => backgroundColor};
   margin: 0 5px 5px;
+  cursor: default;
 
   &:hover {
     box-shadow: ${({ theme: { mainColor } }) => mainColor} 0 0 10px;
@@ -46,6 +47,7 @@ export const Item = styled.div<{ isCurrentCount: boolean }>`
     isCurrentCount && mainColor};
   width: 100%;
   height: 30px;
+  cursor: default;
 
   &:hover {
     background-color: ${({ theme: { mainColor } }) => mainColor};
