@@ -1,10 +1,22 @@
-import 'App.css';
-import React, { ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
-const App = (): ReactElement => {
+import { Select } from 'components';
+
+const currencies = ['USD', 'RUB', 'AUZ', 'BEL', 'LOG'];
+
+export const App = (): ReactElement => {
   useEffect(() => {}, []);
 
-  return <div className="App">Currency converter</div>;
-};
+  const [currency, setCurrency] = useState<string>('USD');
 
-export default App;
+  return (
+    <div style={{ marginTop: '200px' }}>
+      <Select
+        currencies={currencies}
+        currentCurrency={currency}
+        setCurrentCurrency={setCurrency}
+      />
+      <div>{currency}</div>
+    </div>
+  );
+};
