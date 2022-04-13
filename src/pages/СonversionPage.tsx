@@ -1,8 +1,9 @@
-import { ReactElement, useState } from 'react';
+import { ChangeEvent, ReactElement, useState } from 'react';
 
 import { Select } from 'components';
 import { currencies } from 'const';
-import { useFetchConversion } from 'hook/useFetchConversion';
+import { useFetchConversion } from 'hook';
+import { limitingNumberDecimalPlaces } from 'utils/limitingNumberDecimalPlaces';
 
 const ZERO_ELEMENT_ARRAY = 0;
 const FIRST_ELEMENT_ARRAY = 1;
@@ -21,13 +22,18 @@ export const ConversionPage = (): ReactElement => {
     baseAmount,
   );
 
+  const changeCurrencyFiled = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.currentTarget;
+
+    if (!Number.isFinite(Number(value))) {
+      return;
+    }
+    setBaseAmount(limitingNumberDecimalPlaces(value));
+  };
+
   return (
     <div>
-      <input
-        type="number"
-        value={baseAmount}
-        onChange={e => setBaseAmount(e.currentTarget.value)}
-      />
+      <input value={baseAmount} onChange={changeCurrencyFiled} />
       <div>
         <Select
           currencies={currencies}

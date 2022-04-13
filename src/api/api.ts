@@ -14,6 +14,6 @@ type convertType = {
 
 export const API = {
   getConvert(from: string, to: string, amount: string) {
-    return instance.get<convertType>(`currency/${from}/${to}/${amount}`);
+    return instance.get<convertType>(`convert/${from}/${to}/${amount}`);
   },
 };

@@ -39,7 +39,7 @@ export const useFetchConversion = (
 
   useEffect(() => {
     fetchMyAPI();
-  }, [fetchMyAPI]);
+  }, []);
 
   return { amountRequest, errorRequest };
 };
