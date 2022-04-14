@@ -2,7 +2,7 @@ import { useLayoutEffect, useState } from 'react';
 
 import { AxiosError } from 'axios';
 
-import { getCurrency } from 'api/mock';
+import { API } from 'api';
 import { CurrencyType } from 'api/type';
 
 type UseFetchConversionReturnType = {
@@ -18,10 +18,10 @@ export const useFetchConversion = (
 
   const fetchMyAPI = async (): Promise<void> => {
     try {
-      // const {
-      //   data: { data },
-      // } = await API.getConvert(baseCurrency);
-      const { data } = await getCurrency(baseCurrency);
+      const {
+        data: { data },
+      } = await API.getConvert(baseCurrency);
+      // const { data } = await getCurrency(baseCurrency);
 
       setCurrencyRequest(data);
     } catch (err) {
@@ -38,7 +38,7 @@ export const useFetchConversion = (
 
   useLayoutEffect(() => {
     fetchMyAPI();
-  }, []);
+  }, [baseCurrency]);
 
   return { currencyRequest, errorRequest };
 };
