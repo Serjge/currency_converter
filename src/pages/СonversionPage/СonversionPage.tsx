@@ -1,16 +1,20 @@
 import { ChangeEvent, ReactElement, useState } from 'react';
 
+import { H1, Text, Wrapper, WrapperSelect } from './style';
+
 import { Select } from 'components';
 import { currencies } from 'const';
 import { useFetchConversion } from 'hook';
+import { Input } from 'style';
 import { limitingNumberDecimalPlaces } from 'utils';
 
 const ZERO_ELEMENT_ARRAY = 0;
 const FIRST_ELEMENT_ARRAY = 1;
-const INITIAL_AMOUNT = 1;
+const INITIAL_AMOUNT = '1';
+const TWO_DECIMAL_PLACES = 2;
 
 export const ConversionPage = (): ReactElement => {
-  const [baseAmount, setBaseAmount] = useState<number>(INITIAL_AMOUNT);
+  const [baseAmount, setBaseAmount] = useState<string>(INITIAL_AMOUNT);
   const [fromCurrency, setFromCurrency] = useState<string>(
     currencies[ZERO_ELEMENT_ARRAY],
   );
@@ -24,28 +28,36 @@ export const ConversionPage = (): ReactElement => {
     if (!Number.isFinite(Number(value))) {
       return;
     }
-    setBaseAmount(Number(limitingNumberDecimalPlaces(value)));
+    setBaseAmount(limitingNumberDecimalPlaces(value));
   };
 
   return (
-    <div>
-      <input value={baseAmount} onChange={changeCurrencyFiled} />
-      <div>
+    <Wrapper>
+      <H1>Currency Converter</H1>
+      <WrapperSelect>
+        I have
         <Select
           currencies={currencies}
           currentCurrency={fromCurrency}
           setCurrentCurrency={setFromCurrency}
         />
-      </div>
-      <div>
+      </WrapperSelect>
+      <Input width="200px" value={baseAmount} onChange={changeCurrencyFiled} />
+      <WrapperSelect>
+        <div>I need to get</div>
         <Select
           currencies={currencies}
           currentCurrency={toCurrency}
           setCurrentCurrency={setToCurrency}
         />
-      </div>
-      <div>{currencyRequest && currencyRequest[toCurrency].value * baseAmount}</div>
+      </WrapperSelect>
+      <Text>
+        {currencyRequest &&
+          (currencyRequest[toCurrency].value * Number(baseAmount)).toFixed(
+            TWO_DECIMAL_PLACES,
+          )}
+      </Text>
       <div>{errorRequest}</div>
-    </div>
+    </Wrapper>
   );
 };
