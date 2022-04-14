@@ -1,12 +1,1 @@
-export const currencies = [
-  'USD',
-  'RUB',
-  'EUR',
-  'GBP',
-  'AUD',
-  'CAD',
-  'JPY',
-  'AMD',
-  'AED',
-  'BYR',
-];
+export const currencies = ['USD', 'RUB', 'EUR', 'GBP', 'AUD', 'CAD', 'JPY', 'AED', 'BYR'];

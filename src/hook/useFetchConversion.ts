@@ -1,30 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 import { AxiosError } from 'axios';
 
-import { API } from 'api';
+import { getCurrency } from 'api/mock';
+import { CurrencyType } from 'api/type';
 
 type UseFetchConversionReturnType = {
-  amountRequest: number;
+  currencyRequest: CurrencyType | undefined;
   errorRequest: string;
 };
 
-const INITIAL_AMOUNT = 0;
-
 export const useFetchConversion = (
-  from: string,
-  to: string,
-  amount: string,
+  baseCurrency: string,
 ): UseFetchConversionReturnType => {
-  const [amountRequest, setAmountRequest] = useState<number>(INITIAL_AMOUNT);
+  const [currencyRequest, setCurrencyRequest] = useState<CurrencyType>();
   const [errorRequest, setErrorRequest] = useState<string>('');
 
   const fetchMyAPI = async (): Promise<void> => {
     try {
-      const {
-        data: { rateCurrency },
-      } = await API.getConvert(from, to, amount);
-      setAmountRequest(rateCurrency.amount);
+      // const {
+      //   data: { data },
+      // } = await API.getConvert(baseCurrency);
+      const { data } = await getCurrency(baseCurrency);
+
+      setCurrencyRequest(data);
     } catch (err) {
       const { message, response } = err as AxiosError;
       const responseMessage = response?.data.message;
@@ -37,9 +36,9 @@ export const useFetchConversion = (
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchMyAPI();
   }, []);
 
-  return { amountRequest, errorRequest };
+  return { currencyRequest, errorRequest };
 };

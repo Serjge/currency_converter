@@ -1,19 +1,16 @@
+import { AxiosResponse } from 'axios';
+
 import { instance } from 'api';
-
-type CurrencyType = {
-  code: string;
-  name: string;
-  amount: number;
-};
-
-type convertType = {
-  baseCurrency: CurrencyType;
-  rateCurrency: CurrencyType;
-  updatedDate: Date;
-};
+import { DataType } from 'api/type';
 
 export const API = {
-  getConvert(from: string, to: string, amount: string) {
-    return instance.get<convertType>(`convert/${from}/${to}/${amount}`);
+  getConvert(baseCurrency: string): Promise<AxiosResponse<DataType, any>> {
+    return instance.get<DataType>(`latest`, {
+      params: {
+        base_currency: baseCurrency,
+        apikey: process.env.REACT_APP_API_KEY,
+        currencies: 'USD,RUB,EUR,GBP,AUD,CAD,JPY,AMD,AED,BYR',
+      },
+    });
   },
 };
