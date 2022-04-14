@@ -10,29 +10,32 @@ import { H1, WrapperPage, WrapperSelect } from 'style';
 const ZERO_ELEMENT_ARRAY = 0;
 
 export const ListCurrenciesPage = (): ReactElement => {
-  const [fromCurrency, setFromCurrency] = useState<string>(
+  const [baseCurrency, setBaseCurrency] = useState<string>(
     currencies[ZERO_ELEMENT_ARRAY],
   );
 
-  const { errorRequest, currencyRequest } = useFetchConversion(fromCurrency);
+  const { errorRequest, currencyRequest } = useFetchConversion(baseCurrency);
+
+  const filterListCurrencies =
+    currencyRequest &&
+    Object.values(currencyRequest).filter(({ code }) => code !== baseCurrency);
+
+  const currency = filterListCurrencies?.map(({ value, code }) => (
+    <ListCurrenciesItem key={code} value={value} code={code} />
+  ));
 
   return (
     <WrapperPage>
-      <H1>Currency Converter</H1>
+      <H1>List of currencies</H1>
       <WrapperSelect>
         Base currency
         <Select
           currencies={currencies}
-          currentCurrency={fromCurrency}
-          setCurrentCurrency={setFromCurrency}
+          currentCurrency={baseCurrency}
+          setCurrentCurrency={setBaseCurrency}
         />
       </WrapperSelect>
-      <WrapperTable>
-        {currencyRequest &&
-          Object.values(currencyRequest).map(({ value, code }) => (
-            <ListCurrenciesItem value={value} code={code} key={code} />
-          ))}
-      </WrapperTable>
+      <WrapperTable>{currency}</WrapperTable>
       <div>{errorRequest}</div>
     </WrapperPage>
   );

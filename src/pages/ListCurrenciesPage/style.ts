@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
 export const WrapperTable = styled.div`
-  width: 100%;
+  width: 300px;
 `;

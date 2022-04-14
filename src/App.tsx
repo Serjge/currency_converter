@@ -1,9 +1,12 @@
 import { ReactElement } from 'react';
 
-import { ListCurrenciesPage } from 'pages';
+import { Header } from 'components';
+import { Routers } from 'pages';
+import { AppWrapper } from 'style';
 
 export const App = (): ReactElement => (
-  <div style={{ marginTop: '100px', display: 'flex', justifyContent: 'center' }}>
-    <ListCurrenciesPage />
-  </div>
+  <AppWrapper>
+    <Header />
+    <Routers />
+  </AppWrapper>
 );

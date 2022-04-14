@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 
-import { Item, WrapperItem } from 'components/listCurrenciesItem/style';
+import { Item, WrapperItem } from './style';
+
 import { limitingNumberDecimalPlaces } from 'utils';
 
 type ListCurrenciesItemPropsType = {

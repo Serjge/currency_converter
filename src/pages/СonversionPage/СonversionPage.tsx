@@ -14,7 +14,7 @@ const INITIAL_AMOUNT = '1';
 const TWO_DECIMAL_PLACES = 2;
 
 export const ConversionPage = (): ReactElement => {
-  const [baseAmount, setBaseAmount] = useState<string>(INITIAL_AMOUNT);
+  const [amount, setAmount] = useState<string>(INITIAL_AMOUNT);
   const [fromCurrency, setFromCurrency] = useState<string>(
     currencies[ZERO_ELEMENT_ARRAY],
   );
@@ -28,12 +28,13 @@ export const ConversionPage = (): ReactElement => {
     if (!Number.isFinite(Number(value))) {
       return;
     }
-    setBaseAmount(limitingNumberDecimalPlaces(value));
+    setAmount(limitingNumberDecimalPlaces(value));
   };
 
   return (
     <WrapperPage>
       <H1>Currency Converter</H1>
+
       <WrapperSelect>
         I have
         <Select
@@ -42,7 +43,9 @@ export const ConversionPage = (): ReactElement => {
           setCurrentCurrency={setFromCurrency}
         />
       </WrapperSelect>
-      <Input width="200px" value={baseAmount} onChange={changeCurrencyFiled} />
+
+      <Input width="200px" value={amount} onChange={changeCurrencyFiled} />
+
       <WrapperSelect>
         <div>I need to get</div>
         <Select
@@ -51,9 +54,10 @@ export const ConversionPage = (): ReactElement => {
           setCurrentCurrency={setToCurrency}
         />
       </WrapperSelect>
+
       <Text>
         {currencyRequest &&
-          (currencyRequest[toCurrency].value * Number(baseAmount)).toFixed(
+          (currencyRequest[toCurrency].value * Number(amount)).toFixed(
             TWO_DECIMAL_PLACES,
           )}
       </Text>

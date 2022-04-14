@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ReactDOM from 'react-dom';
+import { HashRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import { App } from 'App';
@@ -11,7 +12,9 @@ ReactDOM.render(
   <div>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <App />
+      <HashRouter>
+        <App />
+      </HashRouter>
     </ThemeProvider>
   </div>,
   document.getElementById('root'),
