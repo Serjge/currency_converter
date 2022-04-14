@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
 
-import { ConversionPage } from 'pages';
+import { ListCurrenciesPage } from 'pages';
 
 export const App = (): ReactElement => (
-  <div style={{ marginTop: '200px', display: 'flex', justifyContent: 'center' }}>
-    <ConversionPage />
+  <div style={{ marginTop: '100px', display: 'flex', justifyContent: 'center' }}>
+    <ListCurrenciesPage />
   </div>
 );

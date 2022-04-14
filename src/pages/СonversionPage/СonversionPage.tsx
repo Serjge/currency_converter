@@ -1,11 +1,11 @@
 import { ChangeEvent, ReactElement, useState } from 'react';
 
-import { H1, Text, Wrapper, WrapperSelect } from './style';
+import { Text } from './style';
 
 import { Select } from 'components';
 import { currencies } from 'const';
 import { useFetchConversion } from 'hook';
-import { Input } from 'style';
+import { H1, Input, WrapperPage, WrapperSelect } from 'style';
 import { limitingNumberDecimalPlaces } from 'utils';
 
 const ZERO_ELEMENT_ARRAY = 0;
@@ -32,7 +32,7 @@ export const ConversionPage = (): ReactElement => {
   };
 
   return (
-    <Wrapper>
+    <WrapperPage>
       <H1>Currency Converter</H1>
       <WrapperSelect>
         I have
@@ -58,6 +58,6 @@ export const ConversionPage = (): ReactElement => {
           )}
       </Text>
       <div>{errorRequest}</div>
-    </Wrapper>
+    </WrapperPage>
   );
 };
