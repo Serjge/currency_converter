@@ -11,7 +11,7 @@ List of currencies page you can see the exchange rates relative to the base curr
 - #### React-router-dom
 - #### Styled-components
 
-You can view the project at the link: [Calculator constructor](https://serjge.github.io/currency_converter/)
+You can view the project at the link: [Currency converter](https://serjge.github.io/currency_converter/)
 
 Or clone the repository and install the packages with the command
 

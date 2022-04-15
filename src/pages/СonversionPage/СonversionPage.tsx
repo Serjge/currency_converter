@@ -33,7 +33,7 @@ export const ConversionPage = (): ReactElement => {
 
   return (
     <WrapperPage>
-      <H1>Currency Converter</H1>
+      <H1>Currency converter</H1>
 
       <WrapperSelect>
         I have
